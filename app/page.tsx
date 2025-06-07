@@ -74,18 +74,24 @@ export default function HomePage() {
                 href="/auth/signin"
                 className="flex items-center justify-center"
               > */}
-                <button onClick={() => setAuthMode("signin")} className="text-gray-700 hover:text-slate-900 transition-colors text-sm font-medium hidden sm:block">
-                  Sign In
-                </button>
+              <button
+                onClick={() => setAuthMode("signin")}
+                className="text-gray-700 hover:text-slate-900 transition-colors text-sm font-medium hidden sm:block"
+              >
+                Sign In
+              </button>
               {/* </Link> */}
 
               {/* <Link
                 href="/auth/signup"
                 className="flex items-center justify-center"
               > */}
-                <button onClick={() => setAuthMode("signup")} className="bg-slate-900 hover:bg-slate-800 text-white px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 shadow-lg hover:shadow-xl">
-                  Get Started
-                </button>
+              <button
+                onClick={() => setAuthMode("signup")}
+                className="bg-slate-900 hover:bg-slate-800 text-white px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 shadow-lg hover:shadow-xl"
+              >
+                Get Started
+              </button>
               {/* </Link> */}
 
               <button
@@ -124,7 +130,10 @@ export default function HomePage() {
               >
                 Stats
               </a>
-              <button onClick={() => setAuthMode("signin")} className="block w-full text-left text-gray-700 hover:text-slate-900 transition-colors text-sm font-medium">
+              <button
+                onClick={() => setAuthMode("signin")}
+                className="block w-full text-left text-gray-700 hover:text-slate-900 transition-colors text-sm font-medium"
+              >
                 Sign In
               </button>
             </div>
@@ -294,7 +303,7 @@ export default function HomePage() {
 
           <div className="grid lg:grid-cols-3 gap-8">
             {/* Feature 1 */}
-            <div className="bg-gradient-to-br from-gray-50 to-white p-8 rounded-2xl border border-gray-200 hover:shadow-lg transition-all duration-300 group">
+            {/* <div className="bg-gradient-to-br from-gray-50 to-white p-8 rounded-2xl border border-gray-200 hover:shadow-lg transition-all duration-300 group">
               <div className="w-14 h-14 bg-slate-900 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
                 <Calendar className="w-7 h-7 text-white" />
               </div>
@@ -317,6 +326,32 @@ export default function HomePage() {
                 <div className="flex items-center text-sm text-gray-600">
                   <Check className="w-4 h-4 text-emerald-500 mr-2 flex-shrink-0" />
                   Custom branding options
+                </div>
+              </div>
+            </div> */}
+            <div className="bg-gradient-to-br from-gray-50 to-white p-8 rounded-2xl border border-gray-200 hover:shadow-lg transition-all duration-300 group">
+              <div className="w-14 h-14 bg-slate-900 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                <Calendar className="w-7 h-7 text-white" />
+              </div>
+              <h3 className="text-xl font-bold text-slate-900 mb-3">
+                Event Management Made Simple
+              </h3>
+              <p className="text-gray-600 leading-relaxed mb-6">
+                Create and manage events effortlessly with role-based access,
+                RSVP tracking, and real-time attendee data.
+              </p>
+              <div className="space-y-2">
+                <div className="flex items-center text-sm text-gray-600">
+                  <Check className="w-4 h-4 text-emerald-500 mr-2 flex-shrink-0" />
+                  Role-based access (Admin, Staff, Event Owner)
+                </div>
+                <div className="flex items-center text-sm text-gray-600">
+                  <Check className="w-4 h-4 text-emerald-500 mr-2 flex-shrink-0" />
+                  RSVP form with real-time attendee tracking
+                </div>
+                <div className="flex items-center text-sm text-gray-600">
+                  <Check className="w-4 h-4 text-emerald-500 mr-2 flex-shrink-0" />
+                  Public and private event views
                 </div>
               </div>
             </div>
@@ -509,10 +544,7 @@ export default function HomePage() {
         </div>
       </footer> */}
       {authMode && (
-        <AuthModal
-          initialMode={authMode}
-          onClose={() => setAuthMode(null)}
-        />
+        <AuthModal initialMode={authMode} onClose={() => setAuthMode(null)} />
       )}
     </div>
   );
