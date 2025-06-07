@@ -109,7 +109,7 @@ export default function DashboardSidebar({
           {isHovered && (
             <div className="ml-3 overflow-hidden">
               <h2 className="text-lg font-semibold text-gray-900 whitespace-nowrap">
-                Event Manager
+                Event Easy
               </h2>
             </div>
           )}
