@@ -44,7 +44,7 @@ export default function HomePage() {
                 />
               </div>
               <span className="text-xl font-bold text-slate-900">
-                EventEase
+                EventEasy
               </span>
             </div>
 
@@ -181,7 +181,7 @@ export default function HomePage() {
                     <Calendar className="w-3 h-3 text-white" />
                   </div>
                   <span className="font-semibold text-gray-900 text-sm">
-                    EventEase Dashboard
+                    EventEasy Dashboard
                   </span>
                 </div>
                 <div className="flex space-x-2">
@@ -457,7 +457,7 @@ export default function HomePage() {
               Trusted by creators worldwide
             </h2>
             <p className="text-xl text-slate-300">
-              Join thousands of successful events powered by EventEase
+              Join thousands of successful events powered by EventEasy
             </p>
           </div>
 
@@ -497,7 +497,7 @@ export default function HomePage() {
               <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
                 <Calendar className="w-4 h-4 text-slate-900" />
               </div>
-              <span className="text-xl font-bold text-white">EventEase</span>
+              <span className="text-xl font-bold text-white">EventEasy</span>
             </div>
             
             <div className="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-8">
@@ -507,7 +507,7 @@ export default function HomePage() {
                 <a href="#" className="text-slate-400 hover:text-white transition-colors text-sm">Support</a>
               </div>
               <div className="text-slate-400 text-sm">
-                © 2025 EventEase. All rights reserved.
+                © 2025 EventEasy. All rights reserved.
               </div>
             </div>
           </div>

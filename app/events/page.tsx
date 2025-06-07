@@ -2,8 +2,8 @@ import { prisma } from "@/lib/prisma"
 import PublicEventsView from "@/components/public-events-view"
 
 export const metadata = {
-  title: "All Events - EventEase",
-  description: "Browse all upcoming and past events on EventEase",
+  title: "All Events - EventEasy",
+  description: "Browse all upcoming and past events on EventEasy",
 }
 
 export default async function PublicEventsPage() {

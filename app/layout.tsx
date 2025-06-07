@@ -9,7 +9,7 @@ import Footer from "@/components/footer"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "EventEase - Event Management Made Simple",
+  title: "EventEasy - Event Management Made Simple",
   description: "Professional event planning and management tool",
     generator: 'v0.dev'
 }
