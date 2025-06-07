@@ -38,7 +38,7 @@ For testing purposes, use the following sample credentials:
 
 ### 🔹 Dashboard
 
-![Dashboard](public/readmeassets/dashboard.png)
+![Dashboard](public/readmeassets/Dashboard.png)
 
 ### 🔹 Event Creation Page
 
