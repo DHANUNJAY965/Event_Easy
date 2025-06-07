@@ -42,7 +42,6 @@ export default function EventForm({ event }: EventFormProps) {
   const router = useRouter()
   const { toast } = useToast()
 
-  // Generate time options
   const timeOptions = []
   for (let hour = 0; hour < 24; hour++) {
     for (let minute = 0; minute < 60; minute += 30) {
@@ -56,7 +55,6 @@ export default function EventForm({ event }: EventFormProps) {
     setLoading(true)
     setError("")
 
-    // Validate required fields
     if (!formData.title.trim()) {
       setError("Event title is required")
       setLoading(false)
@@ -78,13 +76,11 @@ export default function EventForm({ event }: EventFormProps) {
 
 
     try {
-      // Combine date and time
       const eventDateTime = new Date(formData.date)
       if (formData.time) {
         const [hours, minutes] = formData.time.split(':').map(Number)
         eventDateTime.setHours(hours, minutes, 0, 0)
       } else {
-        // Set to start of day if no time specified
         eventDateTime.setHours(0, 0, 0, 0)
       }
 

@@ -51,13 +51,11 @@ export default function UserPasswordForm({ userId, userEmail }: UserPasswordForm
       })
 
       if (response.ok) {
-        // Show success toast
         toast({
           title: "Success",
           description: `Password updated successfully for ${userEmail}`,
         })
         
-        // Redirect to users page after a short delay
         setTimeout(() => {
           router.push("/dashboard/users")
         }, 1000)

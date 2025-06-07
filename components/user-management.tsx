@@ -86,7 +86,6 @@ export default function UserManagement({ users, currentUserId }: UserManagementP
           title: "Success",
           description: "User role updated successfully",
         })
-        // Add delay before refresh to ensure toast is visible
         setTimeout(() => {
           router.refresh()
         }, 1500)
@@ -110,7 +109,6 @@ export default function UserManagement({ users, currentUserId }: UserManagementP
   }
 
   const handleDeleteUser = async (userId: string, userName: string) => {
-    // Open the dialog instead of using confirm
     setDeleteDialog({
       isOpen: true,
       userId,
@@ -133,9 +131,7 @@ export default function UserManagement({ users, currentUserId }: UserManagementP
           title: "Success",
           description: "User deleted successfully",
         })
-        // Close dialog first
         setDeleteDialog({ isOpen: false, userId: "", userName: "" })
-        // Add delay before refresh to ensure toast is visible
         setTimeout(() => {
           router.refresh()
         }, 1500)
@@ -176,7 +172,6 @@ export default function UserManagement({ users, currentUserId }: UserManagementP
         })
         setNewUser({ name: "", email: "", password: "", role: "EVENT_OWNER" })
         setIsCreateDialogOpen(false)
-        // Add delay before refresh to ensure toast is visible
         setTimeout(() => {
           router.refresh()
         }, 1500)
@@ -223,7 +218,6 @@ export default function UserManagement({ users, currentUserId }: UserManagementP
         })
         setEditingUser(null)
         setIsEditDialogOpen(false)
-        // Add delay before refresh to ensure toast is visible
         setTimeout(() => {
           router.refresh()
         }, 1500)
@@ -651,7 +645,6 @@ export default function UserManagement({ users, currentUserId }: UserManagementP
         </DialogContent>
       </Dialog>
 
-      {/* Delete User Confirmation Dialog */}
       <Dialog open={deleteDialog.isOpen} onOpenChange={(open) => 
         setDeleteDialog({ ...deleteDialog, isOpen: open })
       }>

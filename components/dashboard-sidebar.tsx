@@ -98,7 +98,6 @@ export default function DashboardSidebar({
       <div className="p-4 border-b border-gray-200">
         <div className="flex items-center justify-center">
           <div className="w-8 h-8 bg-slate-900 rounded-full flex items-center justify-center flex-shrink-0">
-            {/* <Calendar className="w-4 h-4 text-white" /> */}
             <Image
               src="/logo5.png"
               alt="Calendar icon"
@@ -141,7 +140,6 @@ export default function DashboardSidebar({
 
       {/* Navigation */}
       <nav className="flex-1 p-3 space-y-2 overflow-y-auto">
-        {/* Main Navigation */}
         {navigation.map((item) => {
           const Icon = item.icon;
           return (
@@ -242,7 +240,6 @@ export default function DashboardSidebar({
           className={`w-full transition-all duration-300 group relative ${
             isHovered ? "justify-start" : "justify-center px-0"
           }`}
-          // onClick={() => signOut()}
           onClick={() => signOut({ callbackUrl: '/' })}
 
         >
@@ -266,7 +263,6 @@ export default function DashboardSidebar({
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-3">
             <div className="w-8 h-8 lg:w-10 lg:h-10 bg-slate-900 rounded-full flex items-center justify-center">
-              {/* <Calendar className="w-4 h-4 lg:w-6 lg:h-6 text-white" /> */}
               <Image
                 src="/logo5.png"
                 alt="Calendar icon"
@@ -312,7 +308,6 @@ export default function DashboardSidebar({
 
       {/* Navigation */}
       <nav className="flex-1 p-3 lg:p-4 space-y-1 lg:space-y-2 overflow-y-auto">
-        {/* Main Navigation */}
         {navigation.map((item) => {
           const Icon = item.icon;
           return (

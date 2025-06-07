@@ -38,7 +38,6 @@ export default function AuthModal({ onClose, defaultMode = "signin" }: AuthModal
   const router = useRouter()
   const { toast } = useToast()
 
-  // Clear form data and error when switching between modes
   useEffect(() => {
     setFormData({
       name: "",
@@ -63,7 +62,7 @@ export default function AuthModal({ onClose, defaultMode = "signin" }: AuthModal
 
     try {
       if (isSignUp) {
-        console.log("Attempting to register user...") // Debug log
+        console.log("Attempting to register user...") 
         
         const response = await fetch("/api/auth/register", {
           method: "POST",
@@ -71,36 +70,33 @@ export default function AuthModal({ onClose, defaultMode = "signin" }: AuthModal
           body: JSON.stringify(formData),
         })
 
-        console.log("Registration response status:", response.status) // Debug log
+        console.log("Registration response status:", response.status) 
 
         if (response.ok) {
-          console.log("Registration successful") // Debug log
+          console.log("Registration successful")
           
-          // Show success toast
           toast({
             title: "Account Created Successfully",
             description: "Your account has been created. Please sign in to continue.",
           })
-          console.log("Success toast triggered") // Debug log
+          console.log("Success toast triggered") 
           
-          // Switch to sign in mode and clear form
           setIsSignUp(false)
           setFormData({
             name: "",
-            email: formData.email, // Keep email for convenience
+            email: formData.email, 
             password: "",
             role: "EVENT_OWNER",
           })
         } else {
           const data = await response.json()
           const errorMessage = data.error || "Something went wrong"
-          console.log("Registration error:", errorMessage) // Debug log
+          console.log("Registration error:", errorMessage) 
           
-          // Only show error in the form Alert, not as toast
           setError(errorMessage)
         }
       } else {
-        console.log("Attempting to sign in...") // Debug log
+        console.log("Attempting to sign in...") 
         
         const result = await signIn("credentials", {
           email: formData.email,
@@ -108,28 +104,24 @@ export default function AuthModal({ onClose, defaultMode = "signin" }: AuthModal
           redirect: false,
         })
 
-        console.log("Sign in result:", result) // Debug log
+        console.log("Sign in result:", result) 
 
         if (result?.error) {
           const errorMessage = result.error === "CredentialsSignin" 
             ? "Invalid email or password. Please check your credentials and try again."
             : "Authentication failed. Please try again."
           
-          console.log("Sign in error:", errorMessage) // Debug log
+          console.log("Sign in error:", errorMessage)
           
-          // Only show error in the form Alert, not as toast
           setError(errorMessage)
         } else if (result?.ok) {
-          console.log("Sign in successful") // Debug log
+          console.log("Sign in successful") 
           
-          // Only show success as toast
           toast({
             title: "Sign In Successful",
             description: "Welcome back! Redirecting to your dashboard...",
           })
-          console.log("Success toast triggered") // Debug log
-          
-          // Small delay to show the success toast before redirect
+          console.log("Success toast triggered") 
           setTimeout(() => {
             router.push("/dashboard")
             onClose()
@@ -137,10 +129,9 @@ export default function AuthModal({ onClose, defaultMode = "signin" }: AuthModal
         }
       }
     } catch (error) {
-      console.error(isSignUp ? "Registration catch error:" : "Sign in catch error:", error) // Debug log
+      console.error(isSignUp ? "Registration catch error:" : "Sign in catch error:", error) 
       
       const errorMessage = "Something went wrong. Please try again later."
-      // Only show server/network errors in the form Alert, not as toast
       setError(errorMessage)
     } finally {
       setLoading(false)
@@ -154,7 +145,6 @@ export default function AuthModal({ onClose, defaultMode = "signin" }: AuthModal
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 py-4 px-4 sm:px-6 lg:px-8">
       <div className="relative w-full max-w-md">
-        {/* Close Icon */}
         <div className="absolute top-2 right-2 z-10">
           <button 
             onClick={onClose} 

@@ -37,7 +37,6 @@ export default function PublicEventsView({ events }: PublicEventsViewProps) {
   const filteredAndSortedEvents = useMemo(() => {
     let filtered = events
 
-    // Filter by search term
     if (searchTerm) {
       filtered = filtered.filter(
         (event) =>
@@ -48,7 +47,6 @@ export default function PublicEventsView({ events }: PublicEventsViewProps) {
       )
     }
 
-    // Filter by time
     const now = new Date()
     if (filterType === "upcoming") {
       filtered = filtered.filter((event) => isAfter(new Date(event.datetime), now))
@@ -61,7 +59,6 @@ export default function PublicEventsView({ events }: PublicEventsViewProps) {
       )
     }
 
-    // Sort events
     filtered.sort((a, b) => {
       switch (sortBy) {
         case "date":
