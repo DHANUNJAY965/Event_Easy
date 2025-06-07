@@ -13,12 +13,10 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
 
     const { name, email, role } = await request.json()
 
-    // Validate required fields
     if (!name || !email || !role) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 })
     }
 
-    // Check if user exists
     const existingUser = await prisma.user.findUnique({
       where: { id: params.id },
     })
@@ -27,12 +25,10 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
       return NextResponse.json({ error: "User not found" }, { status: 404 })
     }
 
-    // Prevent admin from editing their own details through this endpoint
     if (existingUser.id === session.user.id) {
       return NextResponse.json({ error: "Cannot edit your own details through this endpoint" }, { status: 400 })
     }
 
-    // Check if email is already taken by another user
     const emailExists = await prisma.user.findFirst({
       where: {
         email,
@@ -75,7 +71,6 @@ export async function DELETE(request: NextRequest, { params }: { params: { id: s
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
     }
 
-    // Check if user exists
     const existingUser = await prisma.user.findUnique({
       where: { id: params.id },
     })
@@ -84,7 +79,6 @@ export async function DELETE(request: NextRequest, { params }: { params: { id: s
       return NextResponse.json({ error: "User not found" }, { status: 404 })
     }
 
-    // Prevent admin from deleting themselves
     if (existingUser.id === session.user.id) {
       return NextResponse.json({ error: "Cannot delete your own account" }, { status: 400 })
     }

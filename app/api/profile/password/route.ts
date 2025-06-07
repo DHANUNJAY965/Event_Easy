@@ -14,17 +14,14 @@ export async function PUT(request: NextRequest) {
 
     const { currentPassword, newPassword } = await request.json()
 
-    // Validate required fields
     if (!currentPassword || !newPassword) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 })
     }
 
-    // Validate password length
     if (newPassword.length < 6) {
       return NextResponse.json({ error: "Password must be at least 6 characters" }, { status: 400 })
     }
 
-    // Get user with password
     const user = await prisma.user.findUnique({
       where: { id: session.user.id },
       select: {
@@ -37,17 +34,14 @@ export async function PUT(request: NextRequest) {
       return NextResponse.json({ error: "User not found" }, { status: 404 })
     }
 
-    // Verify current password
     const isPasswordValid = await bcrypt.compare(currentPassword, user.password)
 
     if (!isPasswordValid) {
       return NextResponse.json({ error: "Current password is incorrect" }, { status: 400 })
     }
 
-    // Hash new password
     const hashedPassword = await bcrypt.hash(newPassword, 12)
 
-    // Update password
     await prisma.user.update({
       where: { id: session.user.id },
       data: {

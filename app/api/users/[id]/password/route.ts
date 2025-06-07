@@ -14,12 +14,10 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
 
     const { password } = await request.json()
 
-    // Validate password
     if (!password || password.length < 6) {
       return NextResponse.json({ error: "Password must be at least 6 characters" }, { status: 400 })
     }
 
-    // Check if user exists
     const existingUser = await prisma.user.findUnique({
       where: { id: params.id },
     })
@@ -28,12 +26,10 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
       return NextResponse.json({ error: "User not found" }, { status: 404 })
     }
 
-    // Prevent admin from changing their own password through this endpoint
     if (existingUser.id === session.user.id) {
       return NextResponse.json({ error: "Cannot change your own password through this endpoint" }, { status: 400 })
     }
 
-    // Hash password
     const hashedPassword = await bcrypt.hash(password, 12)
 
     await prisma.user.update({

@@ -11,7 +11,6 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
     }
 
-    // Check if user owns the event or is admin/staff
     const event = await prisma.event.findUnique({
       where: { id: params.id },
       include: {
@@ -29,7 +28,6 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
       return NextResponse.json({ error: "Forbidden" }, { status: 403 })
     }
 
-    // Generate CSV
     const csvHeader = "Name,Email,RSVP Date\n"
     const csvRows = event.rsvps
       .map((rsvp) => `"${rsvp.name}","${rsvp.email}","${rsvp.createdAt.toISOString()}"`)

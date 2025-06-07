@@ -5,7 +5,6 @@ export async function POST(request: NextRequest, { params }: { params: { id: str
   try {
     const { name, email } = await request.json()
 
-    // Check if event exists
     const event = await prisma.event.findUnique({
       where: { id: params.id },
     })
@@ -14,7 +13,6 @@ export async function POST(request: NextRequest, { params }: { params: { id: str
       return NextResponse.json({ error: "Event not found" }, { status: 404 })
     }
 
-    // Check if user already RSVPed
     const existingRSVP = await prisma.rSVP.findUnique({
       where: {
         email_eventId: {
@@ -28,7 +26,6 @@ export async function POST(request: NextRequest, { params }: { params: { id: str
       return NextResponse.json({ error: "You have already RSVPed for this event" }, { status: 400 })
     }
 
-    // Create RSVP
     const rsvp = await prisma.rSVP.create({
       data: {
         name,

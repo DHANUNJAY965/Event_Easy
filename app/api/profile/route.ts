@@ -13,12 +13,10 @@ export async function PUT(request: NextRequest) {
 
     const { name, email } = await request.json()
 
-    // Validate required fields
     if (!name || !email) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 })
     }
 
-    // Check if email is already taken by another user
     const emailExists = await prisma.user.findFirst({
       where: {
         email,

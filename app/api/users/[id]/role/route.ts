@@ -13,12 +13,10 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
 
     const { role } = await request.json()
 
-    // Validate role
     if (!["ADMIN", "STAFF", "EVENT_OWNER"].includes(role)) {
       return NextResponse.json({ error: "Invalid role" }, { status: 400 })
     }
 
-    // Check if user exists
     const existingUser = await prisma.user.findUnique({
       where: { id: params.id },
     })
@@ -27,7 +25,6 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
       return NextResponse.json({ error: "User not found" }, { status: 404 })
     }
 
-    // Prevent admin from changing their own role
     if (existingUser.id === session.user.id) {
       return NextResponse.json({ error: "Cannot change your own role" }, { status: 400 })
     }

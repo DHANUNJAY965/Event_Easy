@@ -5,14 +5,12 @@ export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url)
     const search = searchParams.get("search")
-    const filter = searchParams.get("filter") // 'upcoming', 'past', 'all'
-    const sort = searchParams.get("sort") // 'date', 'title', 'rsvps'
+    const filter = searchParams.get("filter") 
+    const sort = searchParams.get("sort") 
     const limit = searchParams.get("limit")
 
-    // Build where clause
     const where: any = {}
 
-    // Add search filter
     if (search) {
       where.OR = [
         { title: { contains: search, mode: "insensitive" } },
@@ -22,7 +20,6 @@ export async function GET(request: Request) {
       ]
     }
 
-    // Add time filter
     const now = new Date()
     if (filter === "upcoming") {
       where.datetime = { gt: now }
@@ -30,7 +27,6 @@ export async function GET(request: Request) {
       where.datetime = { lt: now }
     }
 
-    // Build orderBy clause
     let orderBy: any = { datetime: "asc" }
     if (sort === "title") {
       orderBy = { title: "asc" }
@@ -38,7 +34,6 @@ export async function GET(request: Request) {
       orderBy = { rsvps: { _count: "desc" } }
     }
 
-    // Fetch events
     const events = await prisma.event.findMany({
       where,
       select: {
@@ -64,7 +59,6 @@ export async function GET(request: Request) {
       take: limit ? Number.parseInt(limit) : undefined,
     })
 
-    // Add computed fields
     const eventsWithStatus = events.map((event) => ({
       ...event,
       status: new Date(event.datetime) > now ? "upcoming" : "past",
