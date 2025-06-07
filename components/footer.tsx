@@ -11,7 +11,7 @@ export default function Footer() {
               className="text-lg font-semibold">Dhanunjay Burada</a>
           <div className="flex space-x-6">
             <a
-              href="https://github.com/DHANUNJAY965"
+              href="https://github.com/DHANUNJAY965/Event_Easy"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center space-x-2 text-gray-600 hover:text-gray-900 transition-colors"
