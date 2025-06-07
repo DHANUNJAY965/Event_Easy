@@ -30,6 +30,35 @@ For testing purposes, use the following sample credentials:
 
 > **Note**: These are sample credentials for testing. In production, ensure all users create their own secure passwords.
 
+## 📸 Screenshots
+
+### 🔹 Landing Page
+
+![Landing Page](public/readmeassets/landing.png)
+
+### 🔹 Dashboard
+
+![Dashboard](public/readmeassets/dashboard.png)
+
+### 🔹 Event Creation Page
+
+![Events Page](public/readmeassets/Event-Creation.png)
+
+### 🔹 User Management Page
+
+![User Management Page](public/readmeassets/user-management.png)
+
+### 🔹 Event Specific Public Page for users to fill out RSVPs
+
+![Event Public Page](public/readmeassets/attendee-form.png)
+
+
+### 🔹 All Events Public Page
+
+![All Events Public Page](public/readmeassets/all-events.png)
+
+
+
 ## ✨ Features
 
 ### Core Functionality
