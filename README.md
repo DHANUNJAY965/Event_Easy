@@ -68,7 +68,7 @@ For testing purposes, use the following sample credentials:
 
 ## Project Structure
 
-\`\`\`
+<!-- \`\`\`
 eventeasy/
 ├── app/                          # Next.js App Router
 │   ├── api/                      # API Routes
@@ -117,7 +117,7 @@ eventeasy/
 ├── next.config.mjs               # Next.js configuration
 ├── package.json                  # Dependencies and scripts
 └── README.md                     # Project documentation
-\`\`\`
+\`\`\` -->
 
 ##  Getting Started
 
@@ -131,7 +131,7 @@ eventeasy/
 
 1. **Clone the repository**
    \`\`\`bash
-   git clone https://github.com/yourusername/eventeasy.git
+   git clone https://github.com/DHANUNJAY965/Event_Easy
    cd eventeasy
    \`\`\`
 
@@ -359,7 +359,7 @@ If you encounter any issues or need help:
 **Dhanunjay Burada**
 - LinkedIn: [Dhanunjay Burada](https://www.linkedin.com/in/dhanunjay-burada-908494241)
 - GitHub: [@dhanunjayburada](https://github.com/DHANUNJAY965)
-- Email:dhanunjayburada6@gmail.com
+- Email: dhanunjayaburada6@gmail.com
 
 ---
 
