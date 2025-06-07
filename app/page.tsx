@@ -124,7 +124,7 @@ export default function HomePage() {
               >
                 Stats
               </a>
-              <button className="block w-full text-left text-gray-700 hover:text-slate-900 transition-colors text-sm font-medium">
+              <button onClick={() => setAuthMode("signin")} className="block w-full text-left text-gray-700 hover:text-slate-900 transition-colors text-sm font-medium">
                 Sign In
               </button>
             </div>
@@ -132,7 +132,6 @@ export default function HomePage() {
         )}
       </nav>
 
-      {/* Hero Section */}
       <section className="pt-24 pb-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-slate-50 to-white">
         <div className="max-w-7xl mx-auto">
           <div className="text-center space-y-8 max-w-4xl mx-auto">
@@ -142,7 +141,6 @@ export default function HomePage() {
               Trusted by 50,000+ event creators worldwide
             </div>
 
-            {/* Main Headline */}
             <div className="space-y-6">
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-slate-900 leading-tight">
                 Event Management <span className="text-slate-600">Made</span>{" "}
@@ -157,7 +155,6 @@ export default function HomePage() {
               </p>
             </div>
 
-            {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <Link
                 href="/auth/signup"
@@ -171,10 +168,8 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Hero Visual */}
           <div className="mt-16 relative max-w-5xl mx-auto">
             <div className="bg-white rounded-2xl shadow-2xl border border-gray-200 overflow-hidden">
-              {/* Mockup Header */}
               <div className="bg-gray-50 px-6 py-4 border-b border-gray-200 flex items-center justify-between">
                 <div className="flex items-center space-x-3">
                   <div className="w-6 h-6 bg-slate-900 rounded flex items-center justify-center">

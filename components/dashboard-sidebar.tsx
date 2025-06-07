@@ -387,7 +387,8 @@ export default function DashboardSidebar({
         <Button
           variant="outline"
           className="w-full justify-start"
-          onClick={() => signOut()}
+          // onClick={() => 
+          onClick={() => signOut({ callbackUrl: '/' })}
         >
           <LogOut className="w-4 h-4 mr-2 flex-shrink-0" />
           Sign Out
