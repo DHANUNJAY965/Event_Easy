@@ -12,6 +12,7 @@ import {
   Home,
   Menu,
   X,
+  BarChart2
 } from "lucide-react";
 import Link from "next/link";
 import { signOut } from "next-auth/react";
@@ -53,17 +54,34 @@ export default function DashboardSidebar({
     },
   ];
 
+
   const adminNavigation =
-    user.role === "ADMIN"
-      ? [
-          {
-            name: "Manage Users",
-            href: "/dashboard/users",
-            icon: UserCog,
-            current: pathname === "/dashboard/users",
-          },
-        ]
-      : [];
+  user.role === "ADMIN"
+    ? [
+        {
+          name: "Manage Users",
+          href: "/dashboard/users",
+          icon: UserCog,
+          current: pathname === "/dashboard/users",
+        },
+        {
+          name: "Reports",
+          href: "/dashboard/reports",
+          icon: BarChart2,
+          current: pathname === "/dashboard/reports",
+        },
+      ]
+    : user.role === "STAFF"
+    ? [
+        {
+          name: "Reports",
+          href: "/dashboard/reports",
+          icon: BarChart2,
+          current: pathname === "/dashboard/reports",
+        },
+      ]
+    : [];
+
 
   const profileNavigation = [
     {

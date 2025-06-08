@@ -24,6 +24,7 @@ interface Event {
     name: string
     email: string
   }>
+   ownerId: string
 }
 
 interface DashboardUser {
