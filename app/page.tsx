@@ -441,8 +441,9 @@ export default function HomePage() {
                 Create Your Event
               </h3>
               <p className="text-gray-600 leading-relaxed">
-                Choose from our professional templates or start from scratch.
-                Customize every detail to match your vision.
+                Fill in essential event details like title, description, venue,
+                and date. Events are instantly visible to public users and
+                manageable from your dashboard.
               </p>
             </div>
 
