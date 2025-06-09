@@ -11,18 +11,21 @@ A comprehensive event planning and management tool built with Next.js, TypeScrip
 For testing purposes, use the following sample credentials:
 
 ### Admin User
+
 - **Email**: `admin@eventeasy.com`
 - **Password**: `Admin@123`
 - **Role**: ADMIN
 - **Permissions**: Full system access, user management, all events, system configuration
 
 ### Staff User
+
 - **Email**: `staff@eventeasy.com`
 - **Password**: `Staff@123`
 - **Role**: STAFF
 - **Permissions**: Event and attendee management, moderate events
 
 ### Event Owner
+
 - **Email**: `owner@eventeasy.com`
 - **Password**: `Owner@123`
 - **Role**: EVENT_OWNER
@@ -52,16 +55,14 @@ For testing purposes, use the following sample credentials:
 
 ![Event Public Page](public/readmeassets/attendee-form.png)
 
-
 ### 🔹 All Events Public Page
 
 ![All Events Public Page](public/readmeassets/all-events.png)
 
-
-
 ## ✨ Features
 
 ### Core Functionality
+
 - **Authentication & Authorization**: Secure login with role-based access (Admin, Staff, Event Owner)
 - **Event Management**: Create, edit, delete, and manage events with full CRUD operations
 - **Public Event Discovery**: Browse all events on a dedicated public page with search and filtering
@@ -71,17 +72,20 @@ For testing purposes, use the following sample credentials:
 - **Profile Management**: Self-service profile and password management
 
 ### User Roles & Permissions
-- **Admin**: Full system access including user management, all events, and system configuration
-- **Staff**: Event and attendee management capabilities
+
+- **Admin**: Full system access including user management, all events, system configuration and access to comprehensive reports and analytics
+- **Staff**: Event and attendee management capabilities, access to comprehensive reports and analytics, can manage all events across the platform
 - **Event Owner**: Create and manage personal events
 - **Public Users**: View events and submit RSVPs without authentication
 
 ### Advanced Features
+
 - **Responsive Design**: Seamless experience across desktop and mobile devices
 - **Real-time Updates**: Dynamic dashboard with live event statistics
 - **Search & Filter**: Advanced filtering by date, location, and event details
 - **Animations**: Smooth UI transitions using Framer Motion
 - **Security**: Comprehensive role-based access control and data protection
+- **Comprehensive Reports**: Staff and Admin analytics dashboard with event performance metrics, RSVP tracking, and user statistics
 
 ## Tech Stack
 
@@ -148,7 +152,7 @@ eventeasy/
 └── README.md                     # Project documentation
 \`\`\` -->
 
-##  Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -167,7 +171,9 @@ eventeasy/
 2. **Install dependencies**
    \`\`\`bash
    npm install
+
    # or
+
    bun install
    \`\`\`
 
@@ -175,135 +181,165 @@ eventeasy/
    \`\`\`bash
    cp .env.example .env
    \`\`\`
-   
+
    Fill in your environment variables:
    \`\`\`env
+
    # Database
+
    DATABASE_URL="postgresql://username:password@host:5432/database?sslmode=require"
-   
+
    # NextAuth
+
    NEXTAUTH_SECRET="your-secret-key-here"
    NEXTAUTH_URL="http://localhost:3000"
    \`\`\`
 
 4. **Set up the database**
    \`\`\`bash
+
    # Generate Prisma client
+
    npx prisma generate
-   
+
    # Push database schema
+
    npx prisma db push
-   
+
    # (Optional) View database in Prisma Studio
+
    npx prisma studio
    \`\`\`
 
 5. **Install shadcn/ui components**
    \`\`\`bash
+
    # Initialize shadcn/ui
+
    npx shadcn@latest init
-   
+
    # Add required components
+
    npx shadcn@latest add button input label card form select textarea table badge alert dialog dropdown-menu toast tabs
    \`\`\`
 
 6. **Run the development server**
    \`\`\`bash
    npm run dev
+
    # or
+
    bun dev
    \`\`\`
 
 7. **Open your browser**
    Navigate to [http://localhost:3000](http://localhost:3000)
 
-
 ## 🔌 API Endpoints
 
 ### Authentication Endpoints
 
 #### POST `/api/auth/register`
+
 Register a new user account.
 
 **Request Body:**
 \`\`\`json
 {
-  "name": "John Doe",
-  "email": "john@example.com",
-  "password": "securepassword",
-  "role": "EVENT_OWNER"
+"name": "John Doe",
+"email": "john@example.com",
+"password": "securepassword",
+"role": "EVENT_OWNER"
 }
 \`\`\`
 
 **Response:**
 \`\`\`json
 {
-  "message": "User created successfully",
-  "userId": "user_id"
+"message": "User created successfully",
+"userId": "user_id"
 }
 \`\`\`
 
 #### POST `/api/auth/[...nextauth]`
+
 NextAuth.js authentication endpoints for login/logout.
 
 ### Event Management Endpoints
 
 #### GET `/api/events`
+
 Fetch all events (authenticated users only).
 
 #### POST `/api/events`
+
 Create a new event (authenticated users only).
 
 #### GET `/api/events/public`
+
 Fetch all events for public viewing with optional filtering.
 
 **Query Parameters:**
+
 - `search` (optional): Search term for title, description, location, or organizer
 - `filter` (optional): Time filter - 'upcoming', 'past', or 'all'
 - `sort` (optional): Sort order - 'date', 'title', or 'rsvps'
 - `limit` (optional): Maximum number of events to return
 
 #### GET `/api/events/[id]`
+
 Fetch a specific event by ID.
 
 #### PUT `/api/events/[id]`
+
 Update an event (owner, staff, or admin only).
 
 #### DELETE `/api/events/[id]`
+
 Delete an event (owner, staff, or admin only).
 
 #### POST `/api/events/[id]/rsvp`
+
 Submit an RSVP for an event.
 
 #### GET `/api/events/[id]/export`
+
 Export event RSVPs as CSV (authenticated event owners only).
 
 ### User Management Endpoints (Admin Only)
 
 #### GET `/api/users`
+
 Fetch all users (admin only).
 
 #### POST `/api/users`
+
 Create a new user (admin only).
 
 #### PUT `/api/users/[id]`
+
 Update user details (admin only).
 
 #### DELETE `/api/users/[id]`
+
 Delete a user (admin only).
 
 #### PUT `/api/users/[id]/role`
+
 Update user role (admin only).
 
 #### PUT `/api/users/[id]/password`
+
 Reset user password (admin only).
 
 ### Profile Management Endpoints
 
 #### PUT `/api/profile`
+
 Update own profile information.
 
 #### PUT `/api/profile/password`
+
 Change own password.
 
 ## 🔒 Security Features
@@ -315,53 +351,66 @@ Change own password.
 - **CSRF Protection**: Built-in protection via NextAuth.js
 - **SQL Injection Prevention**: Prisma ORM provides automatic protection
 
-
 ### Sample Test Flow
 
 1. **Public Event Discovery**
+
    - Visit `/events` to browse all events
    - Test search functionality with various terms
    - Try different filters (upcoming, past, this week)
    - Click on events to view detailed pages
 
-1. **Public Event-specific Discovery**
+2. **Public Event-specific Discovery**
+
    - Visit `/event/:eventid` to view detailed information about a specific event
    - Check event details: title, date, time, location, description, and organizer info
    - Fill out the attendance form to register for the event
    - After submission, verify that the attendee count increases
    - Reload the page to ensure the updated count persists
 
-2. **User Registration & Authentication**
+3. **User Registration & Authentication**
+
    - Register a new account at `/auth/signup`
    - Test login functionality at `/auth/signin`
    - Verify role-based dashboard access
 
-3. **Event Management**
+4. **Event Management**
+
    - Create a new event in the dashboard
    - Edit event details and verify changes
    - Test public event page functionality
    - Submit RSVPs and verify data
 
-4. **Admin Functionality** (if admin role)
+5. **Admin Functionality** (if admin role)
    - Access user management at `/dashboard/users`
    - Create, edit, and manage user accounts
    - Test role changes and permissions
+
+6. **Reports and Analytics** (if Staff or Admin role)
+   - Access reports dashboard at `/dashboard/reports`
+   - Review event performance metrics and analytics
+   - Test CSV export functionality
+   - Navigate to all-events management page
+   - Test search and filtering capabilities
 
 ## 🔧 Development
 
 ### Available Scripts
 
 \`\`\`bash
+
 # Development
-npm run dev          # Start development server
-npm run build        # Build for production
-npm run start        # Start production server
-npm run lint         # Run ESLint
+
+npm run dev # Start development server
+npm run build # Build for production
+npm run start # Start production server
+npm run lint # Run ESLint
 
 # Database
-npm run db:push      # Push schema changes to database
-npm run db:studio    # Open Prisma Studio
-npm run db:generate  # Generate Prisma client
+
+npm run db:push # Push schema changes to database
+npm run db:studio # Open Prisma Studio
+npm run db:generate # Generate Prisma client
 \`\`\`
 
 ## 🤝 Contributing
@@ -386,6 +435,7 @@ If you encounter any issues or need help:
 ## 👨‍💻 Developer
 
 **Dhanunjay Burada**
+
 - LinkedIn: [Dhanunjay Burada](https://www.linkedin.com/in/dhanunjay-burada-908494241)
 - GitHub: [@dhanunjayburada](https://github.com/DHANUNJAY965)
 - Email: dhanunjayaburada6@gmail.com
