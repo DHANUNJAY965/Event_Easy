@@ -39,9 +39,13 @@ For testing purposes, use the following sample credentials:
 
 ![Landing Page](public/readmeassets/landing.png)
 
-### 🔹 Dashboard
+### 🔹 Dashboard Page
 
 ![Dashboard](public/readmeassets/Dashboard.png)
+
+### 🔹 Reports Page
+
+![Dashboard](public/readmeassets/Reports.png)
 
 ### 🔹 Event Creation Page
 
