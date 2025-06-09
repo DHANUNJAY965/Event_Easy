@@ -22,7 +22,7 @@ For testing purposes, use the following sample credentials:
 - **Email**: `staff@eventeasy.com`
 - **Password**: `Staff@123`
 - **Role**: STAFF
-- **Permissions**: Event and attendee management, moderate events
+- **Permissions**: Event and attendee management, moderate events, access to reports.
 
 ### Event Owner
 
