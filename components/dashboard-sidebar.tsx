@@ -114,7 +114,7 @@ export default function DashboardSidebar({
     >
       {/* Header */}
       <div className="p-4 border-b border-gray-200">
-        <div className="flex items-center justify-center">
+        <div className="flex items-center justify-start">
           <div className="w-8 h-8 bg-slate-900 rounded-full flex items-center justify-center flex-shrink-0">
             <Image
               src="/logo5.png"
@@ -157,7 +157,7 @@ export default function DashboardSidebar({
       </div>
 
       {/* Navigation */}
-      <nav className="flex-1 p-3 space-y-2 overflow-y-auto">
+      <nav className="flex-1 p-3 space-y-2">
         {navigation.map((item) => {
           const Icon = item.icon;
           return (

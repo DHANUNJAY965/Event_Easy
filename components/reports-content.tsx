@@ -201,7 +201,7 @@ export default function ReportsContent({ data, userRole }: ReportsContentProps) 
       </div>
 
       {/* Detailed Reports */}
-      <Tabs defaultValue="events" className="w-full">
+      <Tabs defaultValue="events" className="w-full"> 
         <TabsList className="grid w-full grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 h-auto">
           <TabsTrigger value="events" className="text-xs sm:text-sm px-2 py-2">Events Overview</TabsTrigger>
           <TabsTrigger value="performance" className="text-xs sm:text-sm px-2 py-2">Top Performing</TabsTrigger>

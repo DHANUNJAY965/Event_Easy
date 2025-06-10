@@ -1,32 +1,48 @@
-"use client"
+"use client";
 
-import type React from "react"
-import { useState } from "react"
-import { useRouter } from "next/navigation"
-import { format } from "date-fns"
-import { CalendarIcon, Clock } from "lucide-react"
+import type React from "react";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { format } from "date-fns";
+import { CalendarIcon, Clock } from "lucide-react";
 
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Alert, AlertDescription } from "@/components/ui/alert"
-import { Calendar } from "@/components/ui/calendar"
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { useToast } from "@/hooks/use-toast"
-import Link from "next/link"
-import { cn } from "@/lib/utils"
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Calendar } from "@/components/ui/calendar";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { useToast } from "@/hooks/use-toast";
+import Link from "next/link";
+import { cn } from "@/lib/utils";
 
 interface EventFormProps {
   event?: {
-    id: string
-    title: string
-    description: string | null
-    location: string
-    datetime: string
-  }
+    id: string;
+    title: string;
+    description: string | null;
+    location: string;
+    datetime: string;
+  };
 }
 
 export default function EventForm({ event }: EventFormProps) {
@@ -36,56 +52,57 @@ export default function EventForm({ event }: EventFormProps) {
     location: event?.location || "",
     date: event ? new Date(event.datetime) : undefined,
     time: event ? new Date(event.datetime).toTimeString().slice(0, 5) : "",
-  })
-  const [error, setError] = useState("")
-  const [loading, setLoading] = useState(false)
-  const router = useRouter()
-  const { toast } = useToast()
+  });
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
+  const { toast } = useToast();
+  const [open, setOpen] = useState(false); // for Popover control
 
-  const timeOptions = []
+  const timeOptions = [];
   for (let hour = 0; hour < 24; hour++) {
     for (let minute = 0; minute < 60; minute += 30) {
-      const timeString = `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`
-      timeOptions.push(timeString)
+      const timeString = `${hour.toString().padStart(2, "0")}:${minute
+        .toString()
+        .padStart(2, "0")}`;
+      timeOptions.push(timeString);
     }
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setLoading(true)
-    setError("")
+    e.preventDefault();
+    setLoading(true);
+    setError("");
 
     if (!formData.title.trim()) {
-      setError("Event title is required")
-      setLoading(false)
-      return
+      setError("Event title is required");
+      setLoading(false);
+      return;
     }
-    
-    if (!formData.location.trim()) {
-      setError("Event location is required")
-      setLoading(false)
-      return
-    }
-    
-    if (!formData.date) {
-      setError("Event date is required")
-      setLoading(false)
-      return
-    }
-    
 
+    if (!formData.location.trim()) {
+      setError("Event location is required");
+      setLoading(false);
+      return;
+    }
+
+    if (!formData.date) {
+      setError("Event date is required");
+      setLoading(false);
+      return;
+    }
 
     try {
-      const eventDateTime = new Date(formData.date)
+      const eventDateTime = new Date(formData.date);
       if (formData.time) {
-        const [hours, minutes] = formData.time.split(':').map(Number)
-        eventDateTime.setHours(hours, minutes, 0, 0)
+        const [hours, minutes] = formData.time.split(":").map(Number);
+        eventDateTime.setHours(hours, minutes, 0, 0);
       } else {
-        eventDateTime.setHours(0, 0, 0, 0)
+        eventDateTime.setHours(0, 0, 0, 0);
       }
 
-      const url = event ? `/api/events/${event.id}` : "/api/events"
-      const method = event ? "PUT" : "POST"
+      const url = event ? `/api/events/${event.id}` : "/api/events";
+      const method = event ? "PUT" : "POST";
 
       const response = await fetch(url, {
         method,
@@ -96,30 +113,32 @@ export default function EventForm({ event }: EventFormProps) {
           location: formData.location,
           datetime: eventDateTime.toISOString(),
         }),
-      })
+      });
 
       if (response.ok) {
         toast({
-          title: event ? "Event Updated Successfully" : "Event Created Successfully",
-          description: event 
-            ? "Your event has been updated and saved." 
+          title: event
+            ? "Event Updated Successfully"
+            : "Event Created Successfully",
+          description: event
+            ? "Your event has been updated and saved."
             : "Your new event has been created and saved.",
-        })
-        
+        });
+
         setTimeout(() => {
-          router.push("/dashboard")
-          router.refresh()
-        }, 1500)
+          router.push("/dashboard");
+          router.refresh();
+        }, 1500);
       } else {
-        const data = await response.json()
-        setError(data.error || "Something went wrong")
+        const data = await response.json();
+        setError(data.error || "Something went wrong");
       }
     } catch (error) {
-      setError("Something went wrong")
+      setError("Something went wrong");
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   return (
     <Card className="w-full max-w-2xl mx-auto shadow-lg">
@@ -128,10 +147,9 @@ export default function EventForm({ event }: EventFormProps) {
           {event ? "Edit Event" : "Create New Event"}
         </CardTitle>
         <CardDescription className="text-center">
-          {event 
-            ? "Update your event details below" 
-            : "Fill in the details to create your new event"
-          }
+          {event
+            ? "Update your event details below"
+            : "Fill in the details to create your new event"}
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-6">
@@ -149,7 +167,9 @@ export default function EventForm({ event }: EventFormProps) {
             <Input
               id="title"
               value={formData.title}
-              onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+              onChange={(e) =>
+                setFormData({ ...formData, title: e.target.value })
+              }
               placeholder="Enter a descriptive title for your event"
               className="h-11"
             />
@@ -162,7 +182,9 @@ export default function EventForm({ event }: EventFormProps) {
             <Textarea
               id="description"
               value={formData.description}
-              onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+              onChange={(e) =>
+                setFormData({ ...formData, description: e.target.value })
+              }
               rows={4}
               placeholder="Provide additional details about your event (optional)"
               className="resize-none"
@@ -176,7 +198,9 @@ export default function EventForm({ event }: EventFormProps) {
             <Input
               id="location"
               value={formData.location}
-              onChange={(e) => setFormData({ ...formData, location: e.target.value })}
+              onChange={(e) =>
+                setFormData({ ...formData, location: e.target.value })
+              }
               placeholder="Where will your event take place?"
               className="h-11"
             />
@@ -185,7 +209,7 @@ export default function EventForm({ event }: EventFormProps) {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label className="text-sm font-medium">Event Date *</Label>
-              <Popover>
+              <Popover open={open} onOpenChange={setOpen}>
                 <PopoverTrigger asChild>
                   <Button
                     variant="outline"
@@ -206,9 +230,17 @@ export default function EventForm({ event }: EventFormProps) {
                   <Calendar
                     mode="single"
                     selected={formData.date}
-                    onSelect={(date) => setFormData({ ...formData, date })}
+                    // onSelect={(date) => setFormData({ ...formData, date })}
+                    onSelect={(date) => {
+                      if (date) {
+                        setFormData({ ...formData, date });
+                        setOpen(false); // close the popover
+                      }
+                    }}
                     initialFocus
-                    disabled={(date) => date < new Date(new Date().setHours(0, 0, 0, 0))}
+                    disabled={(date) =>
+                      date < new Date(new Date().setHours(0, 0, 0, 0))
+                    }
                   />
                 </PopoverContent>
               </Popover>
@@ -216,7 +248,10 @@ export default function EventForm({ event }: EventFormProps) {
 
             <div className="space-y-2">
               <Label className="text-sm font-medium">Event Time</Label>
-              <Select value={formData.time} onValueChange={(time) => setFormData({ ...formData, time })}>
+              <Select
+                value={formData.time}
+                onValueChange={(time) => setFormData({ ...formData, time })}
+              >
                 <SelectTrigger className="h-11">
                   <div className="flex items-center">
                     <Clock className="mr-2 h-4 w-4" />
@@ -235,16 +270,16 @@ export default function EventForm({ event }: EventFormProps) {
           </div>
 
           <div className="flex flex-col sm:flex-row gap-3 pt-4">
-            <Button 
-              type="submit" 
+            <Button
+              type="submit"
               disabled={loading}
               className="flex-1 h-11 font-medium"
             >
               {loading ? "Saving..." : event ? "Update Event" : "Create Event"}
             </Button>
-            <Button 
-              type="button" 
-              variant="outline" 
+            <Button
+              type="button"
+              variant="outline"
               asChild
               className="flex-1 h-11 font-medium"
             >
@@ -254,5 +289,5 @@ export default function EventForm({ event }: EventFormProps) {
         </form>
       </CardContent>
     </Card>
-  )
+  );
 }
