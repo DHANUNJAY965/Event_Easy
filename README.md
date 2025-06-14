@@ -1,4 +1,4 @@
-# EventEase - Event Management Made Simple
+# EventEasy - Event Management Made Simple
 
 A comprehensive event planning and management tool built with Next.js, TypeScript, and modern web technologies.
 
